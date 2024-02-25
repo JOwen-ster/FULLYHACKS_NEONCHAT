@@ -38,7 +38,7 @@ class BluetoothServer:
 class BluetoothGUI:
     def __init__(self, master, server):
         self.master = master
-        master.title("Bluetooth Tkinter GUI")
+        master.title("NeonChat - Hosted")
         master.iconphoto(True, tk.PhotoImage(file = r"images/favicon.ico"))
         master.geometry('400x300')
         master.config(bg=col)
