@@ -46,7 +46,7 @@ class BluetoothGUI:
         self.master = master
         master.title("NeonChat - Chatter")
         master.iconphoto(True, tk.PhotoImage(file = r"images/favicon.ico"))
-        master.geometry('400x300')
+        master.geometry('600x500')
         master.config(bg=col)
 
         self.client = client
@@ -63,7 +63,7 @@ class BluetoothGUI:
         self.connect_button = tk.Button(master, text="Connect to Host", command=self.connect_to_server, bg=col, fg='magenta')
         self.connect_button.pack(padx=10, pady=10)
 
-        self.received_data_label = tk.Label(master, text="Received data will appear here:", bg=col, fg='white')
+        self.received_data_label = tk.Label(master, text="", bg=col, fg='white')
         self.received_data_label.pack(padx=10, pady=10)
     def connect_to_server(self):
         # Move connection logic to a separate thread

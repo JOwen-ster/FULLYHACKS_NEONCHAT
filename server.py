@@ -41,7 +41,7 @@ class BluetoothGUI:
         self.master = master
         master.title("NeonChat - Host")
         master.iconphoto(True, tk.PhotoImage(file = r"images/favicon.ico"))
-        master.geometry('400x300')
+        master.geometry('600x500')
         master.config(bg=col)
 
         self.server = server
@@ -55,7 +55,7 @@ class BluetoothGUI:
         self.send_button = tk.Button(master, text="Send via Bluetooth", command=self.send_data, bg=col, fg='lightblue')
         self.send_button.pack(padx=10, pady=10)
 
-        self.received_data_label = tk.Label(master, text="Received data will appear here:", bg=col, fg='white')
+        self.received_data_label = tk.Label(master, text="", bg=col, fg='white')
         self.received_data_label.pack(padx=10, pady=10)
 
         # self.connect_button = tk.Button(master, text="Stop Searching", command=self.connect_to_server, bg=col, fg='magenta')
