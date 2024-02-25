@@ -22,8 +22,8 @@ label.pack(padx=20, pady=20)
 
 
 def runClient():
-    ask = simpledialog.askstring(title="Test",
-                                  prompt="What's your Name?:")
+    ask = simpledialog.askstring(title="MAC Address",
+                                  prompt="Enter host MAC Address:")
     root.destroy()
     subprocess.run(['python', 'client.py', ask])
 
