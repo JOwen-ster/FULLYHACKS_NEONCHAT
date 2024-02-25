@@ -39,13 +39,6 @@ class BluetoothClient:
             except Exception as e:
                 print(f"Error receiving data: {e}")
                 break
-    
-    def is_socket_connected(self):
-        try:
-            peer_address = self.client_socket.getpeername()
-        except socket.error:
-            self.connected = False
-            self.client_socket.close()
 
 class BluetoothGUI:
     def __init__(self, master, client):
@@ -76,8 +69,6 @@ class BluetoothGUI:
         # Move connection logic to a separate thread
         connection_thread = Thread(target=self.client.connect)
         connection_thread.start()
-        dc = Thread(target=self.is_socket_connected)
-        dc.start()
 
 
 

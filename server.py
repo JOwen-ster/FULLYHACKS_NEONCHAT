@@ -11,7 +11,7 @@ class BluetoothServer:
         self.clients = []
         self.server_socket = socket.socket(socket.AF_BLUETOOTH, socket.SOCK_STREAM, socket.BTPROTO_RFCOMM)
         self.server_socket.bind((self.host, self.port))
-        self.server_socket.listen(3)
+        self.server_socket.listen(1)
         self.gui = gui
 
     def start(self):
@@ -57,8 +57,12 @@ class BluetoothGUI:
         self.received_data_label = tk.Label(master, text="Received data will appear here:", bg=col, fg='white')
         self.received_data_label.pack(padx=10, pady=10)
 
-        # self.connect_button = tk.Button(master, text="Stop Searching", command=self.connect_to_server, bg=col, fg='magenta')
-        # self.connect_button.pack(padx=10, pady=10)
+    #     self.connect_button = tk.Button(master, text="Stop Searching", command=self.sclose, bg=col, fg='magenta')
+    #     self.connect_button.pack(padx=10, pady=10)
+        
+    # def sclose(self):
+    #     self.master.destroy()
+    #     exit()
 
     def send_data(self):
         data_to_send = self.entry.get()

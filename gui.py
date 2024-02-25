@@ -1,11 +1,12 @@
 import tkinter as tk
 from tkinter import messagebox
 from tkinter import scrolledtext
-import client
 import subprocess
 from tkinter import simpledialog
 from PIL import Image, ImageTk
 import server
+import client
+import socket
 
 root = tk.Tk()
 root.iconphoto(True, tk.PhotoImage(file = r"images/favicon.ico"))
@@ -24,17 +25,32 @@ ipa.pack(padx=10, pady=10)
 textbox = tk.Text(root, height=1, font=('Arial', 12))
 textbox.pack(padx=170, pady=10)
 
-
 def runClient():
-    
     maca = textbox.get('1.0', tk.END).strip()
-    root.destroy()
-    subprocess.run(['python', 'client.py', maca])
+    try:
+        testsocket = socket.socket(socket.AF_BLUETOOTH, socket.SOCK_STREAM, socket.BTPROTO_RFCOMM)
+        testsocket.bind((maca, 4))
+        testsocket.close()
+        root.destroy()
+        subprocess.run(['python', 'client.py', maca])
+    except:
+        messagebox.showerror("Error", "Invalid MAC Address")
+        testsocket.close()
+        return
+
 
 def runServer():
     maca = textbox.get('1.0', tk.END).strip()
-    root.destroy()
-    subprocess.run(['python', 'server.py', maca])
+    try:
+        testsocket = socket.socket(socket.AF_BLUETOOTH, socket.SOCK_STREAM, socket.BTPROTO_RFCOMM)
+        testsocket.bind((maca, 4))
+        testsocket.close()
+        root.destroy()
+        subprocess.run(['python', 'server.py', maca])
+    except:
+        messagebox.showerror("Error", "Invalid MAC Address")
+        testsocket.close()
+        return
 
 imgHost = tk.PhotoImage(file = r"images/neonbuttonhost200x68.png")
 tk.Button(root, image = imgHost, command=runServer).pack(side=tk.LEFT, padx=30)
