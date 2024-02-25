@@ -21,3 +21,9 @@ Neonchat is a Bluetooth-based direct messaging chatbox that allows seamless comm
 
 3. **__Connect to Host__**
    - Click the "Connect to Host" button
+
+## Development
+
+```
+python gui.py
+```
