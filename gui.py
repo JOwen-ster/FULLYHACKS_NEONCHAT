@@ -8,8 +8,7 @@ from PIL import Image, ImageTk
 import server
 
 root = tk.Tk()
-
-
+root.iconphoto(True, tk.PhotoImage(file = r"images/favicon.ico"))
 
 root.geometry('500x500')
 root.title('Neon Chat')
@@ -20,16 +19,22 @@ photo = ImageTk.PhotoImage(image)
 label = tk.Label(root, image=photo)
 label.pack(padx=20, pady=20)
 
+ipa = tk.Label(root, text = "Enter Address:", bg='black', fg='white')
+ipa.pack(padx=10, pady=10)
+textbox = tk.Text(root, height=1, font=('Arial', 12))
+textbox.pack(padx=170, pady=10)
+
 
 def runClient():
-    ask = simpledialog.askstring(title="Test",
-                                  prompt="What's your Name?:")
+    
+    maca = textbox.get('1.0', tk.END).strip()
     root.destroy()
-    subprocess.run(['python', 'client.py', ask])
+    subprocess.run(['python', 'client.py', maca])
 
 def runServer():
+    maca = textbox.get('1.0', tk.END).strip()
     root.destroy()
-    subprocess.run(['python', 'server.py'])
+    subprocess.run(['python', 'server.py', maca])
 
 imgHost = tk.PhotoImage(file = r"images/neonbuttonhost200x68.png")
 tk.Button(root, image = imgHost, command=runServer).pack(side=tk.LEFT, padx=30)

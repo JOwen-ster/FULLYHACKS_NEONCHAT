@@ -1,8 +1,9 @@
 import tkinter as tk
 from threading import Thread
 import socket
-import subprocess
+import sys
 
+col = '#00004d'
 class BluetoothClient:
     def __init__(self, host, port, gui):
         self.host = host
@@ -50,24 +51,25 @@ class BluetoothGUI:
     def __init__(self, master, client):
         self.master = master
         master.title("Bluetooth Tkinter GUI")
+        master.iconphoto(True, tk.PhotoImage(file = r"images/favicon.ico"))
         master.geometry('400x300')
-        master.config(bg='black')
+        master.config(bg=col)
 
         self.client = client
 
-        self.label = tk.Label(master, text="Enter text to send:")
+        self.label = tk.Label(master, text="Enter text to send:", bg=col, fg='white')
         self.label.pack(padx=10, pady=10)
 
         self.entry = tk.Entry(master)
         self.entry.pack(padx=10, pady=10)
 
-        self.send_button = tk.Button(master, text="Send via Bluetooth", command=self.send_data)
+        self.send_button = tk.Button(master, text="Send via Bluetooth", command=self.send_data, bg=col, fg='lightblue')
         self.send_button.pack(padx=10, pady=10)
 
-        self.received_data_label = tk.Label(master, text="Received data will appear here:")
+        self.received_data_label = tk.Label(master, text="Received data will appear here:", bg=col, fg='white')
         self.received_data_label.pack(padx=10, pady=10)
 
-        self.connect_button = tk.Button(master, text="Connect to Server", command=self.connect_to_server)
+        self.connect_button = tk.Button(master, text="Connect to Server", command=self.connect_to_server, bg=col, fg='magenta')
         self.connect_button.pack(padx=10, pady=10)
 
     def connect_to_server(self):
@@ -104,7 +106,7 @@ class BluetoothGUI:
 
 def main(ask='00:00:00:00:00:00'):
     # Replace '00:00:00:00:00:00' with the Bluetooth address of the server device
-    server_bluetooth_address = '5c:fb:3a:53:e8:3e'
+    server_bluetooth_address = sys.argv[1]
     server_port = 4
 
     server = BluetoothClient(server_bluetooth_address, server_port, None)  # Pass None for now
