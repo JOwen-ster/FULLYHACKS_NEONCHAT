@@ -5,6 +5,7 @@ import client
 import subprocess
 from tkinter import simpledialog
 from PIL import Image, ImageTk
+import server
 
 root = tk.Tk()
 
@@ -17,6 +18,9 @@ root.config(bg='black')
 image = Image.open("images/neonchattitle492x96.png")
 photo = ImageTk.PhotoImage(image)
 label = tk.Label(root, image=photo)
+label.pack(padx=20, pady=20)
+
+label = tk.Label(root, text="NEON CHAT", font=('Arial', 24))
 label.pack(padx=20, pady=20)
 
 
@@ -64,7 +68,5 @@ tk.Button(root, image = imgJoin, command=runClient).pack(side=tk.RIGHT, padx=30)
 #     msg.insert(tk.INSERT, new + "\n")
 #     textbox.delete(1.0, tk.END)
 #     client.send(new.encode("utf-8"))
-
-
 
 root.mainloop()
