@@ -20,9 +20,6 @@ photo = ImageTk.PhotoImage(image)
 label = tk.Label(root, image=photo)
 label.pack(padx=20, pady=20)
 
-label = tk.Label(root, text="NEON CHAT", font=('Arial', 24))
-label.pack(padx=20, pady=20)
-
 
 def runClient():
     ask = simpledialog.askstring(title="Test",

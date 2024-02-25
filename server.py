@@ -1,43 +1,76 @@
+import tkinter as tk
+from threading import Thread
 import socket
-import threading
 
-# Server setup
-def run_server():
-    def handle_client(client):
-        try:
-            while True:
-                data = client.recv(1024)
+class BluetoothServer:
+    def __init__(self, host, port, gui):
+        self.host = host
+        self.port = port
+        self.clients = []
+        self.server_socket = socket.socket(socket.AF_BLUETOOTH, socket.SOCK_STREAM, socket.BTPROTO_RFCOMM)
+        self.server_socket.bind((self.host, self.port))
+        self.server_socket.listen(3)
+        self.gui = gui
+
+    def start(self):
+        print("Server listening for incoming connections...")
+        while True:
+            client_socket, client_address = self.server_socket.accept()
+            print(f"Connection established with {client_address}")
+            self.clients.append(client_socket)
+            client_thread = Thread(target=self.handle_client, args=(client_socket,))
+            client_thread.start()
+
+    def handle_client(self, client_socket):
+        while True:
+            try:
+                data = client_socket.recv(1024)
                 if not data:
                     break
-                print(f"msg from {contacts[addr]}: {data.decode('utf-8')}")
-        except OSError as e:
-            pass
-        finally:
-            client.close()
-    
-    server = socket.socket(socket.AF_BLUETOOTH, socket.SOCK_STREAM, socket.BTPROTO_RFCOMM)
-    server.bind(("f0:57:a6:fc:f2:14", 4))
-    server.listen(1)
+                # Update GUI with received data
+                self.gui.update_received_data(data.decode('utf-8'))
+            except Exception as e:
+                print(f"Error handling client: {e}")
+                break
 
-    print("Waiting for a connection...")
+class BluetoothGUI:
+    def __init__(self, master, server):
+        self.master = master
+        master.title("Bluetooth Tkinter GUI")
 
-    # Accept a client connection
-    client, addr = server.accept()
-    contacts = {}
-    contacts[addr] = "owen"
-    print(f"Accepted connection from {contacts[addr]}")
+        self.server = server
 
-    # Start a thread to handle incoming messages
-    receive_thread = threading.Thread(target=handle_client, args=(client,), daemon=True)
-    receive_thread.start()
+        self.label = tk.Label(master, text="Enter text to send:")
+        self.label.pack()
 
-    try:
-        while True:
-            # Main thread for sending messages
-            message = input()
-            client.send(message.encode("utf-8"))
-    except KeyboardInterrupt:
-        pass
-    finally:
-        client.close()
-        server.close()
+        self.entry = tk.Entry(master)
+        self.entry.pack()
+
+        self.send_button = tk.Button(master, text="Send via Bluetooth", command=self.send_data)
+        self.send_button.pack()
+
+        self.received_data_label = tk.Label(master, text="Received data will appear here:")
+        self.received_data_label.pack()
+
+    def send_data(self):
+        data_to_send = self.entry.get()
+        for client in self.server.clients:
+            try:
+                client.send(data_to_send.encode('utf-8'))
+            except Exception as e:
+                print(f"Error sending data: {e}")
+
+    def update_received_data(self, data):
+        self.received_data_label.config(text=f"Received data: {data}")
+
+if __name__ == "__main__":
+    server_bluetooth_address = '5c:fb:3a:53:e8:3e'
+    server = BluetoothServer(server_bluetooth_address, 4, None)  # Pass None for now
+
+    server_thread = Thread(target=server.start)
+    server_thread.start()
+
+    root = tk.Tk()
+    app = BluetoothGUI(root, server)
+    server.gui = app  # Assign the GUI instance to the server
+    root.mainloop()
