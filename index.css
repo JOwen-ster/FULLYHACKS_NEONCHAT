@@ -1,0 +1,174 @@
+/* Add your font via Google Font */
+@import url("https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&display=swap");
+@import url(https://fonts.googleapis.com/css?family=Montserrat:400|Montserrat:500|Montserrat:700);
+
+/* CSS Reset. You don't need to understand these.
+ * They're only here to make CSS consistent across all browsers. */
+@import url("https://necolas.github.io/normalize.css/8.0.1/normalize.css");
+
+/* Define your color scheme here, taken from Fullyhacks color scheme. */
+:root {
+  --body_bg: #fffaf1;
+  --sky_100: #abe1ff;
+  --sky_300: #18aaff;
+  --blue_300: #385ddf;
+  --purple_300: #9ea8ff;
+  --purple_hover: #3b3561;
+  --purple_500: #4f38df;
+  --pink_700: #b438df;
+  --pink_400: #ff8f8f;
+  --pink_300: #df389c;
+  --pink_100: #ffabce;
+  --orange_300: #ffc985;
+  --orange_100: #ffedcc;
+  --purple_main: #340b67;
+  --purple_main_hover: #b49fcc;
+  --black: #041a2f;
+  --white: #ffffff;
+  --primary: #ff69ad;
+  --dark_purple: #461667;
+  --dark_blue: #2399BE;
+}
+
+body {
+  background: linear-gradient(to right, var(--dark_purple), var(--dark_blue));
+  margin: 0;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+max-width: 992px;
+
+html {
+  font-family: "Rubik";
+}
+
+.about {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-left: 12rem;
+  color: white;
+  font-family: "Rubik";
+  font-size: 1.2rem;
+  width: 75%;
+  line-height: 2;
+}
+
+.neonchat {
+  border-radius: 10px;
+}
+
+.Caption {
+  font-family: "Rubik";
+  color: white;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.nav {
+  background: linear-gradient(to right, var(--dark_purple), var(--dark_blue));
+  padding: 2rem;
+  width: 100%;
+  display: flex;
+  list-style: none;
+  justify-content: space-around;
+  font-size: 1.5rem;
+}
+
+.navlink { 
+    text-decoration: none;
+    color: black;
+    list-style: none;
+}
+
+.title {
+  color: white;
+  margin-top: 2rem;
+  font-size: 2rem;
+  font-family: "Rubik";
+}
+
+.pictureCaption {
+  margin-top: 1rem;
+}
+
+.fullypic {
+  margin-top: 2rem;
+  object-fit: cover;
+}
+
+.wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+}
+
+.demo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-left: 8rem;
+  color: white;
+  font-family: "Rubik";
+  font-size: 1.2rem;
+  width: 75%;
+  line-height: 2;
+}
+
+.button {
+  position: relative;
+  border: 0;
+  transition: 0.5s;
+  z-index: 1;
+  min-width: 15rem;
+  padding: 1rem 2rem;
+  font-size: 0.875rem;
+  line-height: 1;
+  font-family: "Rubik";
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: none;
+  text-transform: uppercase;
+  background: var(--black);
+  color: var(--white);
+
+  &:before,
+  &:after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+  }
+
+  &.--glow {
+    &:hover {
+      background: var(--primary);
+      box-shadow: 0 0 5px var(--primary), 
+0 0 25px var(--primary);
+    }
+  }
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 var(--black);
+  }
+  50% {
+    box-shadow: 0 0 10px var(--black);
+  }
+  100% {
+    box-shadow: 0 0 0 var(--black);
+  }
+}
+
+
+
