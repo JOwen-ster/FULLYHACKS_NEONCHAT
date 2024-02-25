@@ -2,6 +2,7 @@ import tkinter as tk
 from threading import Thread
 import socket
 import sys
+import datetime
 
 col = '#260033'
 class BluetoothServer:
@@ -38,9 +39,9 @@ class BluetoothServer:
 class BluetoothGUI:
     def __init__(self, master, server):
         self.master = master
-        master.title("NeonChat - Hosted")
+        master.title("NeonChat - Host")
         master.iconphoto(True, tk.PhotoImage(file = r"images/favicon.ico"))
-        master.geometry('400x300')
+        master.geometry('600x500')
         master.config(bg=col)
 
         self.server = server
@@ -54,7 +55,7 @@ class BluetoothGUI:
         self.send_button = tk.Button(master, text="Send via Bluetooth", command=self.send_data, bg=col, fg='lightblue')
         self.send_button.pack(padx=10, pady=10)
 
-        self.received_data_label = tk.Label(master, text="Received data will appear here:", bg=col, fg='white')
+        self.received_data_label = tk.Label(master, text="", bg=col, fg='white')
         self.received_data_label.pack(padx=10, pady=10)
 
         # self.connect_button = tk.Button(master, text="Stop Searching", command=self.connect_to_server, bg=col, fg='magenta')
@@ -65,11 +66,18 @@ class BluetoothGUI:
         for client in self.server.clients:
             try:
                 client.send(data_to_send.encode('utf-8'))
+                current_text_lines = self.received_data_label.cget("text").split('\n')
+                last_10_lines = current_text_lines[:10]
+                new_text = "\n".join(last_10_lines)
+                self.received_data_label.config(text=(f"YOU[{datetime.datetime.now().strftime('%I:%M %p')}]: " + str(data_to_send) + "\n" + new_text))
             except Exception as e:
                 print(f"Error sending data: {e}")
 
     def update_received_data(self, data):
-        self.received_data_label.config(text=f"Received data: {data}")
+            current_text_lines = self.received_data_label.cget("text").split('\n')
+            last_10_lines = current_text_lines[:10]
+            new_text = "\n".join(last_10_lines)
+            self.received_data_label.config(text=(f"CHATTER[{datetime.datetime.now().strftime('%I:%M %p')}]: " + str(data) + "\n" + new_text))
 
 if __name__ == "__main__":
     server_bluetooth_address = sys.argv[1]
