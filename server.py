@@ -58,8 +58,8 @@ class BluetoothGUI:
         self.received_data_label = tk.Label(master, text="", bg=col, fg='white')
         self.received_data_label.pack(padx=10, pady=10)
 
-    #     self.connect_button = tk.Button(master, text="Stop Searching", command=self.sclose, bg=col, fg='magenta')
-    #     self.connect_button.pack(padx=10, pady=10)
+        # self.connect_button = tk.Button(master, text="Stop Searching", command=self.sclose, bg=col, fg='magenta')
+        # self.connect_button.pack(padx=10, pady=10)
         
     # def sclose(self):
     #     self.master.destroy()
