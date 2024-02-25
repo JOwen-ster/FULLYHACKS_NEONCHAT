@@ -94,6 +94,8 @@ html {
   align-items: center;
   justify-content: center;
   flex-direction: row;
+  padding-left: 2%;
+  padding-right: 2%;
 }
 
 .nav {
