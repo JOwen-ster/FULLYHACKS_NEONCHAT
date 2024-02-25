@@ -38,7 +38,7 @@ def hello():
     msg.insert(tk.INSERT, new + "\n")
     textbox.delete(1.0, tk.END)
 
-photo = tk.PhotoImage(file = r"neonbutton100x34.png")
+photo = tk.PhotoImage(file = r"images/neonbutton100x34.png")
 tk.Button(root, image = photo, command=hello).pack(side=tk.TOP)
 
 
