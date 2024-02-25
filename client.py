@@ -50,6 +50,7 @@ class BluetoothGUI:
     def __init__(self, master, client):
         self.master = master
         master.title("Bluetooth Tkinter GUI")
+        master.iconphoto(True, tk.PhotoImage(file = r"images/favicon.ico"))
         master.geometry('400x300')
         master.config(bg='black')
 

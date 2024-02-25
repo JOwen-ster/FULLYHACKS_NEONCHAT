@@ -8,7 +8,7 @@ from PIL import Image, ImageTk
 import server
 
 root = tk.Tk()
-
+root.iconphoto(True, tk.PhotoImage(file = r"images/favicon.ico"))
 
 
 root.geometry('500x500')
