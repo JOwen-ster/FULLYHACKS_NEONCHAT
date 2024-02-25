@@ -22,8 +22,7 @@ def enter(event):
             hello()
 
 def stopText(event):
-    if event:
-        msg.delete(tk.END)
+    msg.delete(tk.LAST, tk.END)
 
 msg = scrolledtext.ScrolledText(root, height=6, font=('Arial', 12))
 msg.bind("<KeyPress>", stopText)
