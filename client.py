@@ -2,6 +2,7 @@ import tkinter as tk
 from threading import Thread
 import socket
 import sys
+import datetime
 
 col = '#00004d'
 class BluetoothClient:
@@ -39,18 +40,11 @@ class BluetoothClient:
             except Exception as e:
                 print(f"Error receiving data: {e}")
                 break
-    
-    def is_socket_connected(self):
-        try:
-            peer_address = self.client_socket.getpeername()
-        except socket.error:
-            self.connected = False
-            self.client_socket.close()
 
 class BluetoothGUI:
     def __init__(self, master, client):
         self.master = master
-        master.title("NeonChat - Joined")
+        master.title("NeonChat - Chatter")
         master.iconphoto(True, tk.PhotoImage(file = r"images/favicon.ico"))
         master.geometry('400x300')
         master.config(bg=col)
@@ -66,18 +60,15 @@ class BluetoothGUI:
         self.send_button = tk.Button(master, text="Send via Bluetooth", command=self.send_data, bg=col, fg='lightblue')
         self.send_button.pack(padx=10, pady=10)
 
-        self.received_data_label = tk.Label(master, text="Received data will appear here:", bg=col, fg='white')
-        self.received_data_label.pack(padx=10, pady=10)
-
-        self.connect_button = tk.Button(master, text="Connect to Server", command=self.connect_to_server, bg=col, fg='magenta')
+        self.connect_button = tk.Button(master, text="Connect to Host", command=self.connect_to_server, bg=col, fg='magenta')
         self.connect_button.pack(padx=10, pady=10)
 
+        self.received_data_label = tk.Label(master, text="Received data will appear here:", bg=col, fg='white')
+        self.received_data_label.pack(padx=10, pady=10)
     def connect_to_server(self):
         # Move connection logic to a separate thread
         connection_thread = Thread(target=self.client.connect)
         connection_thread.start()
-        dc = Thread(target=self.is_socket_connected)
-        dc.start()
 
 
 
@@ -85,9 +76,16 @@ class BluetoothGUI:
         if self.client.connected:
             data_to_send = self.entry.get()
             self.client.send_data(data_to_send)
+            current_text_lines = self.received_data_label.cget("text").split('\n')
+            last_10_lines = current_text_lines[:10]
+            new_text = "\n".join(last_10_lines)
+            self.received_data_label.config(text=(f"YOU[{datetime.datetime.now().strftime('%I:%M %p')}]: " + str(data_to_send) + "\n" + new_text))
 
     def update_received_data(self, data):
-        self.received_data_label.config(text=f"Received data: {data}")
+        current_text_lines = self.received_data_label.cget("text").split('\n')
+        last_10_lines = current_text_lines[:10]
+        new_text = "\n".join(last_10_lines)
+        self.received_data_label.config(text=(f"HOST[{datetime.datetime.now().strftime('%I:%M %p')}]: " + str(data) + "\n" + new_text))
 
 # def ask(root):
 #     result = None
