@@ -56,19 +56,19 @@ class BluetoothGUI:
 
         self.client = client
 
-        self.label = tk.Label(master, text="Enter text to send:")
+        self.label = tk.Label(master, text="Enter text to send:", bg='black', fg='white')
         self.label.pack(padx=10, pady=10)
 
         self.entry = tk.Entry(master)
         self.entry.pack(padx=10, pady=10)
 
-        self.send_button = tk.Button(master, text="Send via Bluetooth", command=self.send_data)
+        self.send_button = tk.Button(master, text="Send via Bluetooth", command=self.send_data, bg='black', fg='lightblue')
         self.send_button.pack(padx=10, pady=10)
 
-        self.received_data_label = tk.Label(master, text="Received data will appear here:")
+        self.received_data_label = tk.Label(master, text="Received data will appear here:", bg='black', fg='white')
         self.received_data_label.pack(padx=10, pady=10)
 
-        self.connect_button = tk.Button(master, text="Connect to Server", command=self.connect_to_server)
+        self.connect_button = tk.Button(master, text="Connect to Server", command=self.connect_to_server, bg='black', fg='magenta')
         self.connect_button.pack(padx=10, pady=10)
 
     def connect_to_server(self):
