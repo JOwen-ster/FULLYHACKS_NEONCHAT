@@ -5,6 +5,7 @@ import client
 import subprocess
 from tkinter import simpledialog
 from PIL import Image, ImageTk
+import server
 
 root = tk.Tk()
 
@@ -64,7 +65,5 @@ tk.Button(root, image = imgJoin, command=runClient).pack(side=tk.RIGHT, padx=30)
 #     msg.insert(tk.INSERT, new + "\n")
 #     textbox.delete(1.0, tk.END)
 #     client.send(new.encode("utf-8"))
-
-
 
 root.mainloop()
