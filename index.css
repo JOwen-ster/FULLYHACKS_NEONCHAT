@@ -88,6 +88,16 @@ html {
   flex-direction: column;
 }
 
+.img-cont {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  padding-left: 2%;
+  padding-right: 2%;
+}
+
 .nav {
   background: linear-gradient(to right, var(--dark_purple), var(--dark_blue));
   padding: 2rem;
