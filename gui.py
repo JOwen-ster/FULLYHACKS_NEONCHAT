@@ -27,16 +27,16 @@ textbox.pack(padx=170, pady=10)
 
 def runClient():
     maca = textbox.get('1.0', tk.END).strip()
-    try:
-        testsocket = socket.socket(socket.AF_BLUETOOTH, socket.SOCK_STREAM, socket.BTPROTO_RFCOMM)
-        testsocket.bind((maca, 4))
-        testsocket.close()
-        root.destroy()
-        subprocess.run(['python', 'client.py', maca])
-    except:
-        messagebox.showerror("Error", "Invalid MAC Address")
-        testsocket.close()
-        return
+    # try:
+    #     testsocket = socket.socket(socket.AF_BLUETOOTH, socket.SOCK_STREAM, socket.BTPROTO_RFCOMM)
+    #     testsocket.bind((maca, 4))
+    #     testsocket.close()
+    root.destroy()
+    subprocess.run(['python', 'client.py', maca])
+    # except:
+    #     messagebox.showerror("Error", "Invalid MAC Address")
+    #     testsocket.close()
+    #     return
 
 
 def runServer():

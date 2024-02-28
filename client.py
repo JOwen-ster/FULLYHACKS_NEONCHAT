@@ -87,22 +87,10 @@ class BluetoothGUI:
         new_text = "\n".join(last_10_lines)
         self.received_data_label.config(text=(f"HOST[{datetime.datetime.now().strftime('%I:%M %p')}]: " + str(data) + "\n" + new_text))
 
-# def ask(root):
-#     result = None
-#     asklabel = tk.Label(root, text="Enter host MAC Address:")
-#     asklabel.pack()
-
-#     askentry = tk.Entry(root)
-#     askentry.pack()
-
-#     def send_address():
-#         result = askentry.get()
-#     asksend = tk.Button(root, text="Send via Bluetooth", command=send_address)
-#     asksend.pack()
-#     return result
 
 
-def main(ask='00:00:00:00:00:00'):
+
+def main():
     # Replace '00:00:00:00:00:00' with the Bluetooth address of the server device
     server_bluetooth_address = sys.argv[1]
     server_port = 4
